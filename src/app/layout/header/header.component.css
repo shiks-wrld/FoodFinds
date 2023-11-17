@@ -1,0 +1,13 @@
+.header-spacer {
+  flex: 1 1 auto;
+}
+
+img {
+  width: 70px;
+  height: 70px;
+}
+
+mat-toolbar {
+  background-color: #faf0dc;
+  height: auto;
+}
