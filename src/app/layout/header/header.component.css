@@ -11,3 +11,13 @@ mat-toolbar {
   background-color: #faf0dc;
   height: auto;
 }
+
+.title-styles {
+  text-decoration: none;
+  color: black;
+}
+
+mat-sidenav-content{
+  height : 100vh;
+}
+
