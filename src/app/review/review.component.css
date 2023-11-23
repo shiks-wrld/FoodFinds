@@ -1,0 +1,43 @@
+mat-card {
+    height: 575px;
+    width: 1000px;
+    margin: 20px auto 0;
+}
+
+h1 {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 0;
+}
+
+/* container */
+.review-col-grid {
+    display:block;
+    text-align: center;
+}
+
+/* columns */
+.review-col-grid > * {
+    padding:1rem;
+}
+
+mat-form-field {
+    width: 400px;
+}
+
+.comment-section {
+    width: 840px;
+    height: 200px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.submit-btn {
+    display: flex;
+    justify-content: center;
+
+    & button {
+        width: 840px;
+        height: 50px;
+    }
+}

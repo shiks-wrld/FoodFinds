@@ -1,1 +1,47 @@
-<p>review works!</p>
+<mat-card>
+    <form [formGroup]="reviewForm">
+        <h1>Submit a Review</h1>
+        <div class="review-col-grid">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Address</mat-label>
+                <input matInput formControlName="address">
+            </mat-form-field>
+
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Location Name</mat-label>
+                <input matInput formControlName="locationName">
+            </mat-form-field>
+        </div>
+
+        <div class="review-col-grid">
+            <mat-form-field>
+                <mat-label>Type of Cuisine</mat-label>
+                <mat-select formControlName="cuisine">
+                    <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine.value">
+                        {{cuisine.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Food Quality</mat-label>
+                <mat-select formControlName="foodQuality">
+                    <mat-option *ngFor="let q of quality" [value]="q.value">
+                        {{q.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field class="comment-section">
+            <mat-label>Leave a comment</mat-label>
+            <textarea matInput cdkTextareaAutosize="false" placeholder="Ex. My experience was..."
+                      formControlName="comments"></textarea>
+        </mat-form-field>
+
+        <div class="submit-btn">
+
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+        </div>
+    </form>
+</mat-card>
