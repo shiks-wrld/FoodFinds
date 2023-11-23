@@ -1,35 +1,30 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {GoogleMapsModule} from "@angular/google-maps";
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [CommonModule, GoogleMapsModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+    selector: 'app-home',
+    standalone: true,
+    imports: [CommonModule, GoogleMapsModule],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css'
 })
-export class HomeComponent {
-  mapOptions: google.maps.MapOptions = {
-    center: { lat: 42.321510, lng: -83.232338 },
-    zoom : 14
-  }
+export class HomeComponent implements OnInit {
+    zoom = 12;
+    center: google.maps.LatLngLiteral;
 
-  marker = {
-    position: { lat: 42.321510, lng: -83.232338 },
-    title: 'Hello World!'
-  }
+    // Markers
+    marker1 = {position: {lat: 42.504860, lng: -83.087900}, label: "Salvatore Scallopini"};
+    marker2 = {position: {lat: 42.513430, lng: -83.105730}, label: "The Masters Restaurant"};
+    marker3 = {position: {lat: 42.517270, lng: -83.086760}, label: "Phở Tài"};
+    markers = [this.marker1, this.marker2, this.marker3];
 
-  stores = [
-    {
-      name: 'Store 1',
-      location: {lat: 40.785091, lng: -73.968285},
-      hours: '8AM to 10PM'
-    },
-    {
-      name: 'Store 2',
-      location: {lat: 40.790091, lng: -73.968285},
-      hours: '9AM to 9PM'
+    ngOnInit() {
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.center = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+            };
+        });
     }
-  ];
 }
