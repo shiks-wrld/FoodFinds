@@ -17,7 +17,11 @@ mat-toolbar {
   color: black;
 }
 
-mat-sidenav-content{
+mat-sidenav-content {
   height : 100vh;
+}
+
+.sidenav-icon {
+  vertical-align: middle;
 }
 
