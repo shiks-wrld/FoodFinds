@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
@@ -8,16 +8,15 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {ReviewService} from "../services/review.service";
 import {HttpClientModule} from "@angular/common/http";
-
-interface Options {
-  value: string;
-  viewValue: string;
-}
+import {Options} from "../models/options.model";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-review',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatCardModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, HttpClientModule],
+  imports: [CommonModule, ReactiveFormsModule, MatCardModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, HttpClientModule, MatProgressBarModule],
   templateUrl: './review.component.html',
   styleUrl: './review.component.css'
 })
@@ -42,6 +41,8 @@ export class ReviewComponent implements OnInit {
     {value: 'Avoid', viewValue: 'Avoid at all costs!!'}
   ];
 
+  progressBarFlag = false;
+
   @Input() maxRating = 5;
   maxRatingArr: any = [];
 
@@ -51,7 +52,7 @@ export class ReviewComponent implements OnInit {
   @Output()
   onRating: EventEmitter<number> = new EventEmitter<number>()
 
-  constructor(private fb: FormBuilder, private reviewService: ReviewService) {
+  constructor(private fb: FormBuilder, private reviewService: ReviewService, private _snackBar: MatSnackBar, private route: Router) {
   }
 
   ngOnInit() {
@@ -85,10 +86,45 @@ export class ReviewComponent implements OnInit {
     this.onRating.emit(this.selectedStar + 1);
   }
 
+  hasErrors(controls: AbstractControl[]) {
+    return controls.some((control) => control.status === 'INVALID');
+  }
+
+  backToHome(){
+    setTimeout(() => {
+      this.route.navigate(['/']);
+    }, 4000);
+  }
+
   onSubmit(form: FormGroup) {
-    this.reviewForm.controls['rating'].setValue(this.selectedStar);
-    this.reviewService.submitReviews(this.reviewForm.value).subscribe(data => {
-      console.log('Review Form: ', this.reviewForm);
-    });
+    if(!this.hasErrors([this.reviewForm]))
+    {
+      this.progressBarFlag = true;
+      this.reviewForm.controls['rating'].setValue(this.selectedStar);
+      this.reviewService.submitReviews(this.reviewForm.value).subscribe({
+        next: () => {
+          this._snackBar.open('Review was submitted successfully!!', 'X', {
+            duration: 3000,
+            panelClass: 'success-snackbar'
+          });
+          this.progressBarFlag = false;
+          this.backToHome();
+          console.log('Review Form: ', this.reviewForm);
+        },
+        error: (err) => {
+          this.progressBarFlag = false;
+          this._snackBar.open('[ERROR] - Please fill out all fields', 'X', {
+            duration: 3000,
+            panelClass: 'error-snackbar'
+          });
+        }
+      });
+    }
+    else {
+      this._snackBar.open('[WARNING] - Please fill out all fields', 'X', {
+        duration: 3000,
+        panelClass: 'warn-snackbar'
+      });
+    }
   }
 }

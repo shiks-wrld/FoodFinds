@@ -39,7 +39,6 @@ export class RecommendationsComponent implements OnInit {
   ngOnInit(): void {
     this.reviewService.retrieveReviews().subscribe(data => {
       this.reviews = data;
-      this.reviews.filter()
       console.log('Recommendation Form: ', this.reviews);
     });
   }
