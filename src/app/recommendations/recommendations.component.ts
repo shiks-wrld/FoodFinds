@@ -6,11 +6,7 @@ import {FormBuilder} from "@angular/forms";
 import {ReviewService} from "../services/review.service";
 import {FlexModule} from "@angular/flex-layout";
 import {MatButtonModule} from "@angular/material/button";
-
-interface Options {
-  value: string;
-  viewValue: string;
-}
+import {Options} from "../models/options.model";
 
 @Component({
   selector: 'app-recommendations',
