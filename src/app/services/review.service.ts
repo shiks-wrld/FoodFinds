@@ -16,4 +16,8 @@ export class ReviewService {
   public submitReviews(review: ReviewModel) {
     return this.http.post<ReviewModel>(this.baseUrl, review);
   }
+
+  public retrieveReviews() {
+    return this.http.get<ReviewModel>(this.baseUrl);
+  }
 }
