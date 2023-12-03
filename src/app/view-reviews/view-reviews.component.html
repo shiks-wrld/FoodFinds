@@ -1,8 +1,7 @@
 <div class="filter-chip-container">
-  <form>
-    <input type="text" placeholder="Filter by city">
-    <button class="primary" type="button">Search</button>
-  </form>
+  <mat-chip-listbox aria-label="Cuisine Selection">
+    <mat-chip-option   *ngFor="let c of cuisinesOpts">{{c.viewValue}}</mat-chip-option>
+  </mat-chip-listbox>
 </div>
 
 <div class="card-container">

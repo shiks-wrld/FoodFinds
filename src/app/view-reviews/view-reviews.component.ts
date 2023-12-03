@@ -7,6 +7,7 @@ import {MatChipsModule} from "@angular/material/chips";
 import {FormBuilder, FormsModule} from "@angular/forms";
 import {ReviewService} from "../services/review.service";
 import {MatInputModule} from "@angular/material/input";
+import {Options} from "../models/options.model";
 
 @Component({
   selector: 'app-view-reviews',
@@ -18,6 +19,17 @@ import {MatInputModule} from "@angular/material/input";
 export class ViewReviewsComponent implements OnInit {
   reviews: any;
   gridColumns = 3;
+
+  cuisinesOpts: Options[] = [
+    {value: 'Italian', viewValue: 'Italian'},
+    {value: 'Mexican', viewValue: 'Mexican'},
+    {value: 'Chinese', viewValue: 'Chinese'},
+    {value: 'Indian', viewValue: 'Indian'},
+    {value: 'American', viewValue: 'American'},
+    {value: 'Fast-Food', viewValue: 'Fast Food'},
+    {value: 'Japanese', viewValue: 'Japanese'},
+    {value: 'Vegan', viewValue: 'Vegan'},
+  ];
 
   constructor(private fb: FormBuilder, private reviewService: ReviewService) {}
 
