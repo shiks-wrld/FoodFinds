@@ -9,3 +9,25 @@
 .card-container > mat-card {
   width: 200px;
 }
+
+mat-card-header {
+  padding-left: 0;
+}
+
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+
+.comments {
+  white-space: normal;
+}
+
+.like-btn {
+  background: red;
+  color: white;
+}
