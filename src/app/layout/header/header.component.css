@@ -25,3 +25,11 @@ mat-sidenav-content {
   vertical-align: middle;
 }
 
+mat-icon {
+  padding-right: 10px;
+}
+
+.sidenav-titles {
+  vertical-align: middle;
+}
+
