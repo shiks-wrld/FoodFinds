@@ -31,6 +31,9 @@ export class ReviewComponent implements OnInit {
     {value: 'Fast-Food', viewValue: 'Fast Food'},
     {value: 'Japanese', viewValue: 'Japanese'},
     {value: 'Vegan', viewValue: 'Vegan'},
+    {value: 'Thai', viewValue: 'Thai'},
+    {value: 'Vietnamese', viewValue: 'Vietnamese'},
+    {value: 'African', viewValue: 'African'}
   ];
 
   quality: Options[] = [
