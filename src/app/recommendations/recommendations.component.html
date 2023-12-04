@@ -1,0 +1,11 @@
+<span>
+    <input type="text" placeholder="Search" [(ngModel)]= "recommendationSearch">
+</span>
+
+<div *ngFor="let recs of filteredRecommendations()">
+    <mat-card>
+        {{recs.cuisine}}
+        {{recs.taste}}
+        {{recs.mealType}}
+    </mat-card>
+</div>

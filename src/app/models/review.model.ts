@@ -1,4 +1,4 @@
-export interface ReviewModel {
+export interface Review {
     address: string;
     locationName: string;
     cuisine: string;

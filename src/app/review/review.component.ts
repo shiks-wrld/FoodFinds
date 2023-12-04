@@ -6,7 +6,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
-import {ReviewService} from "../services/review.service";
+import {ReviewService} from "../services/ReviewService/review.service";
 import {HttpClientModule} from "@angular/common/http";
 import {Options} from "../models/options.model";
 import {MatProgressBarModule} from "@angular/material/progress-bar";

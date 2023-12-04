@@ -5,7 +5,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {MatChipsModule} from "@angular/material/chips";
 import {FormBuilder, FormsModule} from "@angular/forms";
-import {ReviewService} from "../services/review.service";
+import {ReviewService} from "../services/ReviewService/review.service";
 import {MatInputModule} from "@angular/material/input";
 import {Options} from "../models/options.model";
 
