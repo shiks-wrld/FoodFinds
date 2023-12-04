@@ -11,7 +11,7 @@ describe('ReviewComponent', () => {
       imports: [ReviewComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ReviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

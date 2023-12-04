@@ -11,7 +11,7 @@ describe('RecommendationsComponent', () => {
       imports: [RecommendationsComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(RecommendationsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
