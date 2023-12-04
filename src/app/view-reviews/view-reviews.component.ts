@@ -8,6 +8,8 @@ import {FormBuilder, FormsModule} from "@angular/forms";
 import {ReviewService} from "../services/ReviewService/review.service";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
+import {Review} from "../models/review.model";
+import {Recommendation} from "../models/recommendation.model";
 
 @Component({
   selector: 'app-view-reviews',
@@ -19,6 +21,8 @@ import {MatIconModule} from "@angular/material/icon";
 export class ViewReviewsComponent implements OnInit {
   reviews: any;
   gridColumns = 3;
+  reviewSearch = "";
+  rev: Review[] = [];
 
   constructor(private fb: FormBuilder, private reviewService: ReviewService) {}
 
@@ -26,6 +30,15 @@ export class ViewReviewsComponent implements OnInit {
     this.reviewService.retrieveReviews().subscribe(data => {
       this.reviews = data;
       console.log('Recommendation Form: ', this.reviews);
+      if (data === null) {
+        this.rev = [];
+      } else {
+        this.rev = data as unknown as Review[];
+      }
     });
+  }
+
+  filteredReviews(): Review[] {
+    return this.rev.filter((r) => r.cuisine.toLowerCase().includes(this.reviewSearch.toLowerCase()));
   }
 }

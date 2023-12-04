@@ -1,9 +1,17 @@
+<div class="search-bar-container">
+    <mat-form-field>
+        <mat-label>Search by cuisine</mat-label>
+        <input matInput [(ngModel)]="reviewSearch">
+        <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+</div>
+
 <div class="card-container">
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
         <div [fxFlex]="(100/gridColumns) + '%'"
              fxFlex.xs="100%"
              fxFlex.sm="33%"
-             *ngFor="let review of reviews">
+             *ngFor="let review of filteredReviews()">
             <mat-card class="mat-elevation-z4">
                 <mat-card-content>
                     <mat-card-header>
