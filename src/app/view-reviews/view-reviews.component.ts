@@ -9,7 +9,6 @@ import {ReviewService} from "../services/ReviewService/review.service";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {Review} from "../models/review.model";
-import {Recommendation} from "../models/recommendation.model";
 
 @Component({
   selector: 'app-view-reviews',
