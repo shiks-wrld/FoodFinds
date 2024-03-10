@@ -20,11 +20,22 @@ export class HomeComponent implements OnInit {
     markers = [this.marker1, this.marker2, this.marker3];
 
     ngOnInit() {
+      this.loadGoogleMapsScript(() => {
         navigator.geolocation.getCurrentPosition((position) => {
-            this.center = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-            };
+          this.center = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
         });
+      });
     }
+
+  private loadGoogleMapsScript(callback: () => void): void {
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBog1RYsYIC8i5LEozPlNQXWrL5Dp0_pPc&libraries=places`;
+    script.async = true;
+    script.defer = true;
+    script.onload = callback;
+    document.body.appendChild(script);
+  }
 }
