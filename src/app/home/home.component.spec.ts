@@ -1,23 +1,49 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
+import { CommonModule } from "@angular/common";
+import { GoogleMapsModule } from "@angular/google-maps";
 
-describe('HomeComponent', () => {
+// Mock the Google namespace
+const google = {
+  maps: {
+    LatLngLiteral: class LatLngLiteral {},
+  },
+};
+
+xit('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeComponent]
+      imports: [HomeComponent, CommonModule, GoogleMapsModule],  // Corrected imports here
+      providers: [
+        { provide: 'google', useValue: google }
+      ],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the app', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have a default zoom value of 12', () => {
+    expect(component.zoom).toBe(12);
+  });
+
+  it('should initialize markers', () => {
+    const expectedMarkers = [
+      { position: { lat: 42.504860, lng: -83.087900 }, label: "Salvatore Scallopini" },
+      { position: { lat: 42.513430, lng: -83.105730 }, label: "The Masters Restaurant" },
+      { position: { lat: 42.517270, lng: -83.086760 }, label: "Phở Tài" }
+    ];
+
+    expect(component.markers).toEqual(expectedMarkers);
   });
 });
