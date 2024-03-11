@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {GoogleMapsModule} from "@angular/google-maps";
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 interface Marker {
   position: google.maps.LatLngLiteral;
@@ -8,11 +8,11 @@ interface Marker {
 }
 
 @Component({
-    selector: 'app-home',
-    standalone: true,
-    imports: [CommonModule, GoogleMapsModule],
-    templateUrl: './home.component.html',
-    styleUrl: './home.component.css'
+  selector: 'app-home',
+  standalone: true,
+  imports: [CommonModule, GoogleMapsModule],
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
   zoom = 12;
@@ -21,9 +21,15 @@ export class HomeComponent implements OnInit {
 
   private initializeMap(): void {
     this.markers = [
-      { position: { lat: 42.504860, lng: -83.087900 }, label: "Salvatore Scallopini" },
-      { position: { lat: 42.513430, lng: -83.105730 }, label: "The Masters Restaurant" },
-      { position: { lat: 42.517270, lng: -83.086760 }, label: "Phở Tài" }
+      {
+        position: { lat: 42.50486, lng: -83.0879 },
+        label: 'Salvatore Scallopini',
+      },
+      {
+        position: { lat: 42.51343, lng: -83.10573 },
+        label: 'The Masters Restaurant',
+      },
+      { position: { lat: 42.51727, lng: -83.08676 }, label: 'Phở Tài' },
     ];
   }
 
@@ -37,7 +43,7 @@ export class HomeComponent implements OnInit {
       },
       (error) => {
         console.error('Error getting current location:', error);
-      }
+      },
     );
   }
 

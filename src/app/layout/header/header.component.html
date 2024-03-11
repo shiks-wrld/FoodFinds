@@ -1,39 +1,43 @@
 <mat-toolbar>
-    <button mat-icon-button aria-label="Food Finds Menu" (click)="openedVal = !openedVal">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <img src="assets/image/FoodFinds-Logo.png" alt="Logo"/>
-    <a routerLink="/" class="title-styles"><h1>Food Finds</h1></a>
-    <span class="header-spacer"></span>
+  <button
+    mat-icon-button
+    aria-label="Food Finds Menu"
+    (click)="openedVal = !openedVal"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <img src="assets/image/FoodFinds-Logo.png" alt="Logo" />
+  <a routerLink="/" class="title-styles"><h1>Food Finds</h1></a>
+  <span class="header-spacer"></span>
 </mat-toolbar>
 
 <mat-sidenav-container autosize>
-    <mat-sidenav [opened]="openedVal" mode="side">
-        <mat-nav-list>
-            <a mat-list-item routerLink="review">
+  <mat-sidenav [opened]="openedVal" mode="side">
+    <mat-nav-list>
+      <a mat-list-item routerLink="review">
         <span>
           <mat-icon class="sidenav-icon">input</mat-icon>
           <span class="sidenav-titles">Submit a Review</span>
         </span>
-            </a>
+      </a>
 
-            <a mat-list-item routerLink="view-reviews">
+      <a mat-list-item routerLink="view-reviews">
         <span>
           <mat-icon class="sidenav-icon">description</mat-icon>
           <span class="sidenav-titles">View Reviews</span>
         </span>
-            </a>
+      </a>
 
-            <a mat-list-item routerLink="recommendations">
+      <a mat-list-item routerLink="recommendations">
         <span>
           <mat-icon class="sidenav-icon">recommend</mat-icon>
           <span class="sidenav-titles">Recommendations</span>
         </span>
-            </a>
-        </mat-nav-list>
-    </mat-sidenav>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
 
-    <mat-sidenav-content>
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,33 +1,33 @@
 .search-bar-container {
-    padding: 10px 16px;
+  padding: 10px 16px;
 
-    & mat-form-field {
-        width: 100%;
-    }
+  & mat-form-field {
+    width: 100%;
+  }
 }
 
 .card-container {
-    padding: 16px;
+  padding: 16px;
 }
 
 .card-container > mat-card {
-    width: 200px;
+  width: 200px;
 }
 
 mat-card-header {
-    padding-left: 0;
+  padding-left: 0;
 }
 
 .row {
-    display: flex;
+  display: flex;
 }
 
 .column {
-    flex: 50%;
+  flex: 50%;
 }
 
 .comments {
-    white-space: normal;
+  white-space: normal;
 }
 
 mat-card-content {

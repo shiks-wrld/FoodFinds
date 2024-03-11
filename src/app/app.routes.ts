@@ -1,24 +1,24 @@
 import { Routes } from '@angular/router';
-import {HomeComponent} from "./home/home.component";
-import {ReviewComponent} from "./review/review.component";
-import {RecommendationsComponent} from "./recommendations/recommendations.component";
-import {ViewReviewsComponent} from "./view-reviews/view-reviews.component";
+import { HomeComponent } from './home/home.component';
+import { ReviewComponent } from './review/review.component';
+import { RecommendationsComponent } from './recommendations/recommendations.component';
+import { ViewReviewsComponent } from './view-reviews/view-reviews.component';
 
 export const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: HomeComponent,
   },
   {
-    path: "review",
+    path: 'review',
     component: ReviewComponent,
   },
   {
-    path: "view-reviews",
+    path: 'view-reviews',
     component: ViewReviewsComponent,
   },
   {
-    path: "recommendations",
+    path: 'recommendations',
     component: RecommendationsComponent,
-  }
+  },
 ];

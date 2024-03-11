@@ -1,47 +1,63 @@
 <div class="search-bar-container">
-    <mat-tab-group>
-        <mat-tab label="Meal Type">
-            <div class="filter-chip-container">
-                <mat-chip-listbox aria-label="Meal Type Selection" [(ngModel)]="recommendationSearch">
-                    <mat-chip-option *ngFor="let c of mealOpts">{{c.viewValue}}</mat-chip-option>
-                </mat-chip-listbox>
-            </div>
-        </mat-tab>
+  <mat-tab-group>
+    <mat-tab label="Meal Type">
+      <div class="filter-chip-container">
+        <mat-chip-listbox
+          aria-label="Meal Type Selection"
+          [(ngModel)]="recommendationSearch"
+        >
+          <mat-chip-option *ngFor="let c of mealOpts">{{
+            c.viewValue
+          }}</mat-chip-option>
+        </mat-chip-listbox>
+      </div>
+    </mat-tab>
 
-        <mat-tab label="Taste">
-            <div class="filter-chip-container">
-                <mat-chip-listbox aria-label="Taste Selection" [(ngModel)]="recommendationSearch">
-                    <mat-chip-option *ngFor="let c of tasteOpts">{{c.viewValue}}</mat-chip-option>
-                </mat-chip-listbox>
-            </div>
-        </mat-tab>
+    <mat-tab label="Taste">
+      <div class="filter-chip-container">
+        <mat-chip-listbox
+          aria-label="Taste Selection"
+          [(ngModel)]="recommendationSearch"
+        >
+          <mat-chip-option *ngFor="let c of tasteOpts">{{
+            c.viewValue
+          }}</mat-chip-option>
+        </mat-chip-listbox>
+      </div>
+    </mat-tab>
 
-        <mat-tab label="Cuisine">
-            <div class="filter-chip-container">
-                <mat-chip-listbox aria-label="Cuisine Selection" [(ngModel)]="recommendationSearch">
-                    <mat-chip-option *ngFor="let c of cuisinesOpts">{{c.viewValue}}</mat-chip-option>
-                </mat-chip-listbox>
-            </div>
-        </mat-tab>
-    </mat-tab-group>
+    <mat-tab label="Cuisine">
+      <div class="filter-chip-container">
+        <mat-chip-listbox
+          aria-label="Cuisine Selection"
+          [(ngModel)]="recommendationSearch"
+        >
+          <mat-chip-option *ngFor="let c of cuisinesOpts">{{
+            c.viewValue
+          }}</mat-chip-option>
+        </mat-chip-listbox>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>
 
 <div class="card-container">
-    <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div [fxFlex]="(100/gridColumns) + '%'"
-             fxFlex.xs="100%"
-             fxFlex.sm="33%"
-             *ngFor="let recs of filteredRecommendations()">
-            <mat-card class="mat-elevation-z4">
-                <mat-card-content>
-                    <mat-card-header>
-                        <mat-card-title>{{recs.recommendation}}</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-subtitle>Location:</mat-card-subtitle>
-                    <p>{{recs.recommendationAddress}}</p>
-                </mat-card-content>
-            </mat-card>
-        </div>
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div
+      [fxFlex]="100 / gridColumns + '%'"
+      fxFlex.xs="100%"
+      fxFlex.sm="33%"
+      *ngFor="let recs of filteredRecommendations()"
+    >
+      <mat-card class="mat-elevation-z4">
+        <mat-card-content>
+          <mat-card-header>
+            <mat-card-title>{{ recs.recommendation }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-subtitle>Location:</mat-card-subtitle>
+          <p>{{ recs.recommendationAddress }}</p>
+        </mat-card-content>
+      </mat-card>
     </div>
+  </div>
 </div>
-

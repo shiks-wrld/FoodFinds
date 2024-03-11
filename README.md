@@ -1,4 +1,5 @@
 # FoodFinds
+
 Welcome to the FoodFinds - frontend application page! Here you will find the frontend application code and have the ability to run the application locally.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0. Please have the latest version of NodeJS installed on your machine before running this application.

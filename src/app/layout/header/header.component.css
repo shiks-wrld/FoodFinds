@@ -18,7 +18,7 @@ mat-toolbar {
 }
 
 mat-sidenav-content {
-  height : 100vh;
+  height: 100vh;
 }
 
 .sidenav-icon {
@@ -32,4 +32,3 @@ mat-icon {
 .sidenav-titles {
   vertical-align: middle;
 }
-

@@ -1,32 +1,44 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FlexModule} from "@angular/flex-layout";
-import {MatButtonModule} from "@angular/material/button";
-import {MatCardModule} from "@angular/material/card";
-import {MatChipsModule} from "@angular/material/chips";
-import {FormBuilder, FormsModule} from "@angular/forms";
-import {ReviewService} from "../services/ReviewService/review.service";
-import {MatInputModule} from "@angular/material/input";
-import {MatIconModule} from "@angular/material/icon";
-import {Review} from "../models/review.model";
+import { FlexModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { FormBuilder, FormsModule } from '@angular/forms';
+import { ReviewService } from '../services/ReviewService/review.service';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { Review } from '../models/review.model';
 
 @Component({
   selector: 'app-view-reviews',
   standalone: true,
-  imports: [CommonModule, FlexModule, MatButtonModule, MatCardModule, MatChipsModule, MatInputModule, FormsModule, MatIconModule],
+  imports: [
+    CommonModule,
+    FlexModule,
+    MatButtonModule,
+    MatCardModule,
+    MatChipsModule,
+    MatInputModule,
+    FormsModule,
+    MatIconModule,
+  ],
   templateUrl: './view-reviews.component.html',
-  styleUrl: './view-reviews.component.css'
+  styleUrl: './view-reviews.component.css',
 })
 export class ViewReviewsComponent implements OnInit {
   reviews: any;
   gridColumns = 3;
-  reviewSearch = "";
+  reviewSearch = '';
   rev: Review[] = [];
 
-  constructor(private fb: FormBuilder, private reviewService: ReviewService) {}
+  constructor(
+    private fb: FormBuilder,
+    private reviewService: ReviewService,
+  ) {}
 
   ngOnInit(): void {
-    this.reviewService.retrieveReviews().subscribe(data => {
+    this.reviewService.retrieveReviews().subscribe((data) => {
       this.reviews = data;
       console.log('Recommendation Form: ', this.reviews);
       if (data === null) {
@@ -38,6 +50,8 @@ export class ViewReviewsComponent implements OnInit {
   }
 
   filteredReviews(): Review[] {
-    return this.rev.filter((r) => r.cuisine.toLowerCase().includes(this.reviewSearch.toLowerCase()));
+    return this.rev.filter((r) =>
+      r.cuisine.toLowerCase().includes(this.reviewSearch.toLowerCase()),
+    );
   }
 }

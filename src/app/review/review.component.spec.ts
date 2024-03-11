@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReviewComponent } from './review.component';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {RouterTestingModule} from "@angular/router/testing";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ReviewService} from "../services/ReviewService/review.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReviewService } from '../services/ReviewService/review.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 describe('ReviewComponent', () => {
   let component: ReviewComponent;
@@ -15,8 +15,13 @@ describe('ReviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReviewComponent, HttpClientTestingModule, RouterTestingModule, BrowserAnimationsModule],
-      providers: [ReviewService, MatSnackBar]
+      imports: [
+        ReviewComponent,
+        HttpClientTestingModule,
+        RouterTestingModule,
+        BrowserAnimationsModule,
+      ],
+      providers: [ReviewService, MatSnackBar],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ReviewComponent);
@@ -25,7 +30,6 @@ describe('ReviewComponent', () => {
     snackBar = TestBed.inject(MatSnackBar);
     fixture.detectChanges();
   });
-
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -43,10 +47,9 @@ describe('ReviewComponent', () => {
       cuisine: '',
       rating: 0,
       foodQuality: '',
-      comments: ''
+      comments: '',
     });
   });
-
 
   it('should update selected star on mouse enter', () => {
     component.handleMouseEnter(2);
@@ -62,7 +65,9 @@ describe('ReviewComponent', () => {
   it('should disable submit button when form is invalid', () => {
     component.reviewForm.invalid;
     fixture.detectChanges();
-    const submitButton = fixture.nativeElement.querySelector('button[type="submit"]');
+    const submitButton = fixture.nativeElement.querySelector(
+      'button[type="submit"]',
+    );
     expect(submitButton.disabled).toBeFalsy();
   });
 
@@ -73,10 +78,12 @@ describe('ReviewComponent', () => {
       cuisine: 'Italian',
       rating: 4,
       foodQuality: 'Amazing',
-      comments: 'Great experience!'
+      comments: 'Great experience!',
     });
     fixture.detectChanges();
-    const submitButton = fixture.nativeElement.querySelector('button[type="submit"]');
+    const submitButton = fixture.nativeElement.querySelector(
+      'button[type="submit"]',
+    );
     expect(submitButton.disabled).toBeFalsy();
   });
 });

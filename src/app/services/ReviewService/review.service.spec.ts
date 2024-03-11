@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ReviewService } from './review.service';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ReviewService', () => {
   let service: ReviewService;
@@ -9,7 +9,7 @@ describe('ReviewService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ReviewService]
+      providers: [ReviewService],
     });
     service = TestBed.inject(ReviewService);
   });

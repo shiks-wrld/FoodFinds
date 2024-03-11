@@ -1,48 +1,52 @@
 <div class="search-bar-container">
-    <mat-form-field>
-        <mat-label>Search by cuisine</mat-label>
-        <input matInput [(ngModel)]="reviewSearch">
-        <mat-icon matPrefix>search</mat-icon>
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>Search by cuisine</mat-label>
+    <input matInput [(ngModel)]="reviewSearch" />
+    <mat-icon matPrefix>search</mat-icon>
+  </mat-form-field>
 </div>
 
 <div class="card-container">
-    <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div [fxFlex]="(100/gridColumns) + '%'"
-             fxFlex.xs="100%"
-             fxFlex.sm="33%"
-             *ngFor="let review of filteredReviews()">
-            <mat-card class="mat-elevation-z4">
-                <mat-card-content>
-                    <mat-card-header>
-                        <mat-card-title style="white-space: normal;">{{review.locationName}}</mat-card-title>
-                    </mat-card-header>
-                    <hr>
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div
+      [fxFlex]="100 / gridColumns + '%'"
+      fxFlex.xs="100%"
+      fxFlex.sm="33%"
+      *ngFor="let review of filteredReviews()"
+    >
+      <mat-card class="mat-elevation-z4">
+        <mat-card-content>
+          <mat-card-header>
+            <mat-card-title style="white-space: normal">{{
+              review.locationName
+            }}</mat-card-title>
+          </mat-card-header>
+          <hr />
 
-                    <div class="row">
-                        <div class="column">
-                            <mat-card-subtitle>Location:</mat-card-subtitle>
-                            <p>{{review.address}}</p>
+          <div class="row">
+            <div class="column">
+              <mat-card-subtitle>Location:</mat-card-subtitle>
+              <p>{{ review.address }}</p>
 
-                            <mat-card-subtitle>Rating:</mat-card-subtitle>
-                            <p>{{review.rating}}</p>
-                        </div>
+              <mat-card-subtitle>Rating:</mat-card-subtitle>
+              <p>{{ review.rating }}</p>
+            </div>
 
-                        <div class="column">
-                            <mat-card-subtitle>Cuisine:</mat-card-subtitle>
-                            <p>{{review.cuisine}}</p>
+            <div class="column">
+              <mat-card-subtitle>Cuisine:</mat-card-subtitle>
+              <p>{{ review.cuisine }}</p>
 
-                            <mat-card-subtitle>Food Quality:</mat-card-subtitle>
-                            <p>{{review.foodQuality}}</p>
-                        </div>
-                    </div>
+              <mat-card-subtitle>Food Quality:</mat-card-subtitle>
+              <p>{{ review.foodQuality }}</p>
+            </div>
+          </div>
 
-                    <div>
-                        <mat-card-subtitle>Comments:</mat-card-subtitle>
-                        <p class="comments">{{review.comments}}</p>
-                    </div>
-                </mat-card-content>
-            </mat-card>
-        </div>
+          <div>
+            <mat-card-subtitle>Comments:</mat-card-subtitle>
+            <p class="comments">{{ review.comments }}</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
+  </div>
 </div>

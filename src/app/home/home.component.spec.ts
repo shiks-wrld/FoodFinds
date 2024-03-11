@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
-import { CommonModule } from "@angular/common";
-import { GoogleMapsModule } from "@angular/google-maps";
+import { CommonModule } from '@angular/common';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 // Mock the Google namespace
 const google = {
@@ -17,12 +17,9 @@ xit('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeComponent, CommonModule, GoogleMapsModule],  // Corrected imports here
-      providers: [
-        { provide: 'google', useValue: google }
-      ],
-    })
-      .compileComponents();
+      imports: [HomeComponent, CommonModule, GoogleMapsModule], // Corrected imports here
+      providers: [{ provide: 'google', useValue: google }],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
@@ -39,9 +36,15 @@ xit('HomeComponent', () => {
 
   it('should initialize markers', () => {
     const expectedMarkers = [
-      { position: { lat: 42.504860, lng: -83.087900 }, label: "Salvatore Scallopini" },
-      { position: { lat: 42.513430, lng: -83.105730 }, label: "The Masters Restaurant" },
-      { position: { lat: 42.517270, lng: -83.086760 }, label: "Phở Tài" }
+      {
+        position: { lat: 42.50486, lng: -83.0879 },
+        label: 'Salvatore Scallopini',
+      },
+      {
+        position: { lat: 42.51343, lng: -83.10573 },
+        label: 'The Masters Restaurant',
+      },
+      { position: { lat: 42.51727, lng: -83.08676 }, label: 'Phở Tài' },
     ];
 
     expect(component.markers).toEqual(expectedMarkers);

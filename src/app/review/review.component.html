@@ -4,12 +4,12 @@
     <div class="review-col-grid">
       <mat-form-field class="form-field" appearance="outline">
         <mat-label>Address</mat-label>
-        <input matInput formControlName="address">
+        <input matInput formControlName="address" />
       </mat-form-field>
 
       <mat-form-field class="form-field" appearance="outline">
         <mat-label>Location Name</mat-label>
-        <input matInput formControlName="locationName">
+        <input matInput formControlName="locationName" />
       </mat-form-field>
     </div>
 
@@ -18,7 +18,7 @@
         <mat-label>Type of Cuisine</mat-label>
         <mat-select formControlName="cuisine">
           <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine.value">
-            {{cuisine.viewValue}}
+            {{ cuisine.viewValue }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -27,26 +27,32 @@
         <mat-label>Food Quality</mat-label>
         <mat-select formControlName="foodQuality">
           <mat-option *ngFor="let q of quality" [value]="q.value">
-            {{q.viewValue}}
+            {{ q.viewValue }}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
 
     <div class="review-rating">
-        <mat-icon *ngFor="let icon of maxRatingArr; let index = index"
-                  (mouseenter)="handleMouseEnter(index)"
-                  (mouseleave)="handleMouseLeave()"
-                  (click)="rating(index)"
-                  [ngClass]="{checked: selectedStar > index}"
-        >
-          star
-        </mat-icon>
+      <mat-icon
+        *ngFor="let icon of maxRatingArr; let index = index"
+        (mouseenter)="handleMouseEnter(index)"
+        (mouseleave)="handleMouseLeave()"
+        (click)="rating(index)"
+        [ngClass]="{ checked: selectedStar > index }"
+      >
+        star
+      </mat-icon>
     </div>
 
     <mat-form-field class="comment-section">
       <mat-label>Leave a comment</mat-label>
-      <input matInput placeholder="Ex. My experience was..." formControlName="comments" style="white-space: normal;">
+      <input
+        matInput
+        placeholder="Ex. My experience was..."
+        formControlName="comments"
+        style="white-space: normal"
+      />
     </mat-form-field>
 
     <div class="submit-btn">
