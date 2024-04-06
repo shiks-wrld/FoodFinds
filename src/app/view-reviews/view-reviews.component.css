@@ -1,25 +1,28 @@
 .search-bar-container {
   padding: 10px 16px;
-
-  & mat-form-field {
-    width: 100%;
-  }
+  width: 100%;
 }
 
 .card-container {
   padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.card-container > mat-card {
-  width: 200px;
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
-mat-card-header {
-  padding-left: 0;
+.card-item {
+  width: calc(33.33% - 16px);
+  margin-bottom: 16px;
 }
 
-mat-card-content {
-  height: 350px;
+.mat-card {
+  width: 100%;
 }
 
 .row {
@@ -27,7 +30,8 @@ mat-card-content {
 }
 
 .column {
-  flex: 50%;
+  flex: 1;
+  margin-right: 16px;
 }
 
 .comments {

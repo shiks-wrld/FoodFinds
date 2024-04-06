@@ -1,35 +1,38 @@
 .search-bar-container {
   padding: 10px 16px;
-
-  & mat-form-field {
-    width: 100%;
-  }
+  width: 100%;
 }
 
 .card-container {
   padding: 16px;
 }
 
-.card-container > mat-card {
-  width: 200px;
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.card-item {
+  width: 100%;
+}
+
+.mat-card {
+  width: 100%;
+}
+
+.mat-card-content {
+  height: 125px;
 }
 
 mat-card-header {
   padding-left: 0;
 }
 
-.row {
-  display: flex;
-}
-
-.column {
-  flex: 50%;
+mat-card-subtitle {
+  font-weight: bold;
 }
 
 .comments {
   white-space: normal;
-}
-
-mat-card-content {
-  height: 125px;
 }

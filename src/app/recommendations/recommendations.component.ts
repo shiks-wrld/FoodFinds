@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import { FlexModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { RecommendationService } from '../services/RecommendationService/recommendation.service';
 import { Recommendation } from '../models/recommendation.model';
@@ -20,7 +19,6 @@ import { MatTabsModule } from '@angular/material/tabs';
     CommonModule,
     MatCardModule,
     MatChipsModule,
-    FlexModule,
     MatButtonModule,
     MatInputModule,
     FormsModule,
@@ -34,7 +32,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 export class RecommendationsComponent implements OnInit {
   recommendationSearch = '';
   rec: Recommendation[] = [];
-  gridColumns = 4;
 
   cuisinesOpts: Options[] = [
     { value: 'Italian', viewValue: 'Italian' },
