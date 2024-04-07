@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FlexModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -15,7 +14,6 @@ import { Review } from '../models/review.model';
   standalone: true,
   imports: [
     CommonModule,
-    FlexModule,
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
@@ -28,7 +26,6 @@ import { Review } from '../models/review.model';
 })
 export class ViewReviewsComponent implements OnInit {
   reviews: any;
-  gridColumns = 3;
   reviewSearch = '';
   rev: Review[] = [];
 
