@@ -2,24 +2,39 @@
   <mat-tab-group>
     <mat-tab label="Meal Type">
       <div>
-        <mat-chip-listbox aria-label="Meal Type Selection" [(ngModel)]="recommendationSearch">
-          <mat-chip-option *ngFor="let c of mealOpts">{{ c.viewValue }}</mat-chip-option>
+        <mat-chip-listbox
+          aria-label="Meal Type Selection"
+          [(ngModel)]="recommendationSearch"
+        >
+          <mat-chip-option *ngFor="let c of mealOpts">{{
+            c.viewValue
+          }}</mat-chip-option>
         </mat-chip-listbox>
       </div>
     </mat-tab>
 
     <mat-tab label="Taste">
       <div>
-        <mat-chip-listbox aria-label="Taste Selection" [(ngModel)]="recommendationSearch">
-          <mat-chip-option *ngFor="let c of tasteOpts">{{ c.viewValue }}</mat-chip-option>
+        <mat-chip-listbox
+          aria-label="Taste Selection"
+          [(ngModel)]="recommendationSearch"
+        >
+          <mat-chip-option *ngFor="let c of tasteOpts">{{
+            c.viewValue
+          }}</mat-chip-option>
         </mat-chip-listbox>
       </div>
     </mat-tab>
 
     <mat-tab label="Cuisine">
       <div>
-        <mat-chip-listbox aria-label="Cuisine Selection" [(ngModel)]="recommendationSearch">
-          <mat-chip-option *ngFor="let c of cuisinesOpts">{{ c.viewValue }}</mat-chip-option>
+        <mat-chip-listbox
+          aria-label="Cuisine Selection"
+          [(ngModel)]="recommendationSearch"
+        >
+          <mat-chip-option *ngFor="let c of cuisinesOpts">{{
+            c.viewValue
+          }}</mat-chip-option>
         </mat-chip-listbox>
       </div>
     </mat-tab>
