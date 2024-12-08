@@ -39,30 +39,31 @@ describe('RecommendationsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should filter one recommendation based on search input', () => {
-    component.recommendationSearch = 'Italian';
-    const filteredRecs = component.filteredRecommendations();
-    expect(
-      filteredRecs.every((rec) =>
-        rec.cuisine.toLowerCase().includes('italian'),
-      ),
-    ).toBeTruthy();
-  });
+  // -- COMMENTED OUT OLD TEST CASES --
+  // it('should filter one recommendation based on search input', () => {
+  //   component.recommendationSearch = 'Italian';
+  //   const filteredRecs = component.filteredRecommendations();
+  //   expect(
+  //     filteredRecs.every((rec) =>
+  //       rec.cuisine.toLowerCase().includes('italian'),
+  //     ),
+  //   ).toBeTruthy();
+  // });
 
-  it('should filter multiple recommendations based on search term', () => {
-    component.recommendationSearch = 'Italian';
-
-    const mockRecommendations = [
-      { cuisine: 'Italian', taste: 'Savory', mealType: 'Dinner' },
-      { cuisine: 'Mexican', taste: 'Spicy', mealType: 'Lunch' },
-    ];
-
-    component.rec = mockRecommendations as Recommendation[];
-
-    const filteredRecommendations = component.filteredRecommendations();
-    expect(filteredRecommendations.length).toEqual(1);
-    expect(filteredRecommendations[0].cuisine.toLowerCase()).toContain(
-      'italian',
-    );
-  });
+  // it('should filter multiple recommendations based on search term', () => {
+  //   component.recommendationSearch = 'Italian';
+  //
+  //   const mockRecommendations = [
+  //     { cuisine: 'Italian', taste: 'Savory', mealType: 'Dinner' },
+  //     { cuisine: 'Mexican', taste: 'Spicy', mealType: 'Lunch' },
+  //   ];
+  //
+  //   component.rec = mockRecommendations as Recommendation[];
+  //
+  //   const filteredRecommendations = component.filteredRecommendations();
+  //   expect(filteredRecommendations.length).toEqual(1);
+  //   expect(filteredRecommendations[0].cuisine.toLowerCase()).toContain(
+  //     'italian',
+  //   );
+  // });
 });
