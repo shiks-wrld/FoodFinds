@@ -19,6 +19,11 @@
         {
           "command": "foodfinds.generateUnitTests",
           "title": "Generate Unit Tests"
+      },
+      {
+        "command": "foodfinds.analyzeCodeSmells",
+        "title": "Analyze Project for Code Smells",
+        "category": "Code Analysis"
       }
     ]
 },

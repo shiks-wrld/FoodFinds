@@ -3,114 +3,129 @@ import * as fs from 'fs';
 import * as path from 'path';
 import axios from 'axios';
 
-async function analyzeCode(codeSnippet: string, taskType: "smells" | "tests"): Promise<string> {
-    const apiKey = process.env.API_KEY;
-    const url = 'https://api.openai.com/v1/chat/completions';
+async function analyzeCodeSmellsWithOpenAI(folderPath: string, apiKey: string): Promise<
+  Array<{
+    fileName: string;
+    issues: Array<{ lineNumber: number; description: string }>;
+  }>
+> {
+  try {
+    // Read all TypeScript files in the folder
+    const files = fs.readdirSync(folderPath);
+    const codeFiles = files.filter((file) => file.endsWith('.ts')); // Only TypeScript files
 
-    const promptMessage =
-        taskType === "smells"
-            ? `Analyze the following Angular code and detect any code smells or architectural issues:\n\n${codeSnippet}`
-            : `Write unit tests for the following Angular code using the Jasmine framework. Include edge cases and ensure proper coverage:\n\n${codeSnippet}`;
+    const results = [];
 
-    try {
-        const response = await axios.post(url, {
-            model: "gpt-3.5-turbo", // Or "gpt-4" if available
-            messages: [
-                {
-                    role: "system",
-                    content: "You are a helpful assistant skilled in Angular development."
-                },
-                {
-                    role: "user",
-                    content: promptMessage
-                }
-            ],
-            max_tokens: 500,
-            temperature: 0.3,
-        }, {
-            headers: {
-                'Authorization': `Bearer ${apiKey}`,
-                'Content-Type': 'application/json'
-            }
+    // Process each file individually
+    for (const file of codeFiles) {
+      const filePath = path.join(folderPath, file);
+      const content = fs.readFileSync(filePath, 'utf-8');
+
+      // Construct prompt for the file
+      const prompt = `Analyze the following TypeScript code and detect code smells or bugs. For each issue, specify:
+- Line number
+- Description of the issue
+
+File: ${file}
+Code:
+${content}`;
+
+      // Send request to OpenAI API
+      const response = await axios.post(
+        'https://api.openai.com/v1/chat/completions',
+        {
+          model: 'gpt-3.5-turbo',
+          messages: [
+            { role: 'system', content: 'You are a code reviewer that identifies code smells and bugs in TypeScript code.' },
+            { role: 'user', content: prompt },
+          ],
+          max_tokens: 1500,
+          temperature: 0.5,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      // Parse response
+      const responseText = response.data.choices[0].message.content;
+
+      // Extract issues from response
+      interface CodeIssue {
+        lineNumber: number;
+        description: string;
+      }
+
+      // Assuming `responseText` is a string containing lines with code smells
+      const issues: CodeIssue[] = responseText
+        .split('\n')
+        .filter((line: string) => line.trim() !== '') // Remove empty lines
+        .map((entry: string): CodeIssue => {
+          const match = entry.match(/Line (\d+):\s*(.*)/);
+          if (match) {
+            return { lineNumber: parseInt(match[1], 10), description: match[2].trim() };
+          } else {
+            return { lineNumber: 0, description: entry.trim() };
+          }
         });
 
-        if (response.data && response.data.choices && response.data.choices[0]) {
-            return response.data.choices[0].message.content.trim();
-        } else {
-            throw new Error("Unexpected API response structure");
-        }
-    } catch (error) {
-        console.error("Failed to analyze code:", error);
 
-        if (axios.isAxiosError(error)) {
-            console.error("Axios error details:", error.response?.data || error.message);
-        }
-
-        return "Error analyzing code: " + (error as Error).message;
+      // Add to results
+      results.push({
+        fileName: file,
+        issues,
+      });
     }
+
+    return results;
+
+  } catch (error) {
+    throw new Error(`Failed to analyze code: ${error instanceof Error ? error.message : String(error)}`);
+  }
 }
 
-async function writeTestsToFile(uri: vscode.Uri, testCases: string): Promise<void> {
-    const fileName = path.basename(uri.fsPath);
-    const specFileName = fileName.replace('.ts', '.spec.ts');
-    const specFilePath = path.join(path.dirname(uri.fsPath), specFileName);
 
-    try {
-        if (fs.existsSync(specFilePath)) {
-            // Append the test cases to an existing spec file
-            fs.appendFileSync(specFilePath, `\n\n${testCases}`);
-            vscode.window.showInformationMessage(`Tests appended to ${specFileName}`);
-        } else {
-            // Create a new spec file and write the test cases
-            fs.writeFileSync(specFilePath, testCases);
-            vscode.window.showInformationMessage(`Test file ${specFileName} created successfully`);
-        }
-    } catch (err) {
-        console.error("Error writing to spec file:", err);
-        vscode.window.showErrorMessage(`Failed to write test cases to ${specFileName}`);
+async function analyzeProjectForSmellsAndExport(folderPath: string) {
+  try {
+    const apiKey = process.env.API_KEY;    if (!apiKey) {
+      vscode.window.showErrorMessage('OpenAI API key is not set.');
+      return; // Exit if API key is missing
     }
+
+    const analysisResults = await analyzeCodeSmellsWithOpenAI(folderPath, apiKey);
+
+    if (!analysisResults || analysisResults.length === 0) {
+      throw new Error('No analysis results were generated.');
+    }
+
+    const filePath = path.join(folderPath, 'codeSmellsReport.json');
+    fs.writeFileSync(filePath, JSON.stringify(analysisResults, null, 2));
+    vscode.window.showInformationMessage('Code smells report generated successfully!');
+  } catch (error) {
+    vscode.window.showErrorMessage(`Failed to generate report: ${error instanceof Error ? error.message : String(error)}`);
+  }
 }
+
+
+
 
 export function activate(context: vscode.ExtensionContext) {
-    console.log('Your extension "FoodFinds" is now active!');
+  const analyzeProjectCommand = vscode.commands.registerCommand('foodfinds.analyzeCodeSmells', async () => {
+    const folderUri = vscode.workspace.workspaceFolders?.[0]?.uri;
 
-    // Command to analyze code smells
-    let disposableSmells = vscode.commands.registerCommand('foodfinds.analyzeCodeSmells', async () => {
-        const editor = vscode.window.activeTextEditor;
-        if (!editor) {
-            vscode.window.showInformationMessage("No editor is active.");
-            return;
-        }
+    if (!folderUri) {
+      vscode.window.showErrorMessage('No folder is open in the workspace.');
+      return;
+    }
 
-        const selection = editor.selection;
-        const codeSnippet = editor.document.getText(selection.isEmpty ? undefined : selection);
+    const folderPath = folderUri.fsPath;
+    await analyzeProjectForSmellsAndExport(folderPath);
+  });
 
-        const result = await analyzeCode(codeSnippet, "smells");
-
-        const outputChannel = vscode.window.createOutputChannel("Code Smells Analysis");
-        outputChannel.show();
-        outputChannel.appendLine("Code Smells Analysis Result:");
-        outputChannel.appendLine(result);
-    });
-
-    // Command to generate unit tests
-    let disposableTests = vscode.commands.registerCommand('foodfinds.generateUnitTests', async () => {
-        const editor = vscode.window.activeTextEditor;
-        if (!editor) {
-            vscode.window.showInformationMessage("No editor is active.");
-            return;
-        }
-
-        const selection = editor.selection;
-        const codeSnippet = editor.document.getText(selection.isEmpty ? undefined : selection);
-
-        const result = await analyzeCode(codeSnippet, "tests");
-
-        const uri = editor.document.uri;
-        await writeTestsToFile(uri, result);
-    });
-
-    context.subscriptions.push(disposableSmells, disposableTests);
+  context.subscriptions.push(analyzeProjectCommand);
 }
 
 export function deactivate() {}
