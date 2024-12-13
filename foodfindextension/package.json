@@ -10,15 +10,15 @@
     "Other"
   ],
   "main": "./dist/extension.js",
-"contributes": {
+  "contributes": {
     "commands": [
-        {
-            "command": "foodfinds.analyzeCodeSmells",
-            "title": "Analyze Code Smells"
-        },
-        {
-          "command": "foodfinds.generateUnitTests",
-          "title": "Generate Unit Tests"
+      {
+        "command": "foodfinds.analyzeCodeSmells",
+        "title": "Analyze Code Smells"
+      },
+      {
+        "command": "foodfinds.generateUnitTests",
+        "title": "Generate Unit Tests"
       },
       {
         "command": "foodfinds.analyzeCodeSmells",
@@ -26,7 +26,7 @@
         "category": "Code Analysis"
       }
     ]
-},
+  },
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "webpack",
